@@ -56,7 +56,7 @@ namespace Hades_Map_Helper.Managers
                     }
                     if (obstacle.Location.X > f_x)
                     {
-                        l_x = obstacle.Location.X;
+                        l_x = obstacle.Location.X; 
                     }
                     if (obstacle.Location.Y > f_y)
                     {
