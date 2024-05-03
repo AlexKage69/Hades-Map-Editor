@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Data;
+﻿using Hades_Map_Editor.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Managers
+namespace Hades_Map_Editor.Managers
 {
     public sealed class SaveManager
     {
@@ -39,7 +39,6 @@ namespace Hades_Map_Helper.Managers
             {
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog
                 {
-                    InitialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\",
                     Title = "Browse Map Texts",
 
                     CheckFileExists = true,
@@ -69,7 +68,6 @@ namespace Hades_Map_Helper.Managers
             {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog
                 {
-                    InitialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\",
                     Title = "Browse Map Texts",
 
                     CheckFileExists = true,
@@ -175,14 +173,12 @@ namespace Hades_Map_Helper.Managers
         private string OpenFile(
             string title = "Browse Files",
             string defaultExt = "hades_map",
-            string filter = "map texts (*.hades_map)|*.hades_map",
-            string initialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\"    
+            string filter = "map texts (*.hades_map)|*.hades_map"
             )
         {
             string path = "";
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
-                InitialDirectory = initialDirectory,
                 Title = title,
 
                 CheckFileExists = true,

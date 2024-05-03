@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Components
+namespace Hades_Map_Editor.Components
 {
     public class TopMenuStrip: MenuStrip, IComponent
     {
@@ -19,9 +19,9 @@ namespace Hades_Map_Helper.Components
             assetMenu, assetCompileAction, assetFetchAction, assetSubBiomes,
             mapMenu, 
             helpMenu;
-    HadesMapHelper app;
+    HadesMapEditor app;
         public List<ToolStripMenuItem> filesRecentAction, assetSubBiomesAction;
-        public TopMenuStrip(HadesMapHelper app)
+        public TopMenuStrip(HadesMapEditor app)
         {
             this.app = app;
             Initialize();
@@ -171,7 +171,7 @@ namespace Hades_Map_Helper.Components
             SaveManager saveManager = SaveManager.GetInstance();
             try
             {
-                app.tabPage.CreateNewTabPage(saveManager.LoadProject(""));
+                app.tabPage.CreateNewTabPage(saveManager.ImportMap(""));
             }
             catch (Exception) { }
 

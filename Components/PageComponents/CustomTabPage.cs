@@ -1,5 +1,5 @@
-﻿using Hades_Map_Helper.Data;
-using Hades_Map_Helper.Sections;
+﻿using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Components
+namespace Hades_Map_Editor.Components
 {
     public class CustomTabPage : TabPage, IComponent
     {

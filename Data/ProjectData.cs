@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hades_Map_Helper.Data
+namespace Hades_Map_Editor.Data
 {
     public class ProjectData
     {

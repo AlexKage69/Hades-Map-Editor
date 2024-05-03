@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8C01766B-0817-45C2-BDD5-4B0BD28315FE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Hades_Map_Helper</RootNamespace>
-    <AssemblyName>Hades Map Helper</AssemblyName>
+    <RootNamespace>Hades_Map_Editor</RootNamespace>
+    <AssemblyName>Hades-Map-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -89,7 +89,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\HadesMapHelper.cs" />
+    <Compile Include="Components\HadesMapEditor.cs" />
     <Compile Include="Components\PageComponents\CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -161,16 +161,16 @@
     <Compile Include="Managers\ConfigManager.cs" />
     <Compile Include="Managers\SaveManager.cs" />
     <Compile Include="Managers\Utility.cs" />
-    <Compile Include="HadesMapHelperForm.cs">
+    <Compile Include="HadesMapEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HadesMapHelperForm.Designer.cs">
-      <DependentUpon>HadesMapHelperForm.cs</DependentUpon>
+    <Compile Include="HadesMapEditorForm.Designer.cs">
+      <DependentUpon>HadesMapEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="HadesMapHelperForm.resx">
-      <DependentUpon>HadesMapHelperForm.cs</DependentUpon>
+    <EmbeddedResource Include="HadesMapEditorForm.resx">
+      <DependentUpon>HadesMapEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -180,6 +180,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

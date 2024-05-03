@@ -1,5 +1,5 @@
-﻿using Hades_Map_Helper.Components;
-using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Components;
+using Hades_Map_Editor.Managers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,23 +12,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper
+namespace Hades_Map_Editor
 {
-    public partial class HadesMapHelperForm : Form
+    public partial class HadesMapEditorForm : Form
     {
-        HadesMapHelper hmh;
-        public HadesMapHelperForm()
+        HadesMapEditor hmh;
+        public HadesMapEditorForm()
         {
             InitializeComponent();
             //FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
 
-            hmh = new HadesMapHelper(this);
+            hmh = new HadesMapEditor(this);
         }
 
         // Resize?
         public Size oldSize;
-        private void HadesMapHelperForm_Load(object sender, EventArgs e) => oldSize = base.Size;
+        private void HadesMapEditorForm_Load(object sender, EventArgs e) => oldSize = base.Size;
 
         protected override void OnResize(System.EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace Hades_Map_Helper
             control.Top += (control.Top * height) / oldSize.Height;
             control.Height += (control.Height * height) / oldSize.Height;
         }
-        private void HadesMapHelperForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        private void HadesMapEditorForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Console.WriteLine("Paint");
         }        

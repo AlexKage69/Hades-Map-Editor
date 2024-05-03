@@ -1,5 +1,5 @@
-﻿using Hades_Map_Helper.Data;
-using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.ElementsSection
+namespace Hades_Map_Editor.ElementsSection
 {
     public class ElementsList : ListBox, IComponent, Focusable
     {

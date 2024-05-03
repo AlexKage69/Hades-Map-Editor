@@ -1,6 +1,6 @@
-﻿using Hades_Map_Helper.Components;
-using Hades_Map_Helper.Data;
-using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Components;
+using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper
+namespace Hades_Map_Editor
 {
-    public class HadesMapHelper
+    public class HadesMapEditor
     {
         public Form form;
         //public AssetManager assetManager;
@@ -27,7 +27,7 @@ namespace Hades_Map_Helper
         //ToolbarPanel toolbarPanel;
         //ElementPanel elementPanel;
         //PropertyPanel2 propertyPanel;
-        public HadesMapHelper(Form parent)
+        public HadesMapEditor(Form parent)
         {
             form = parent;
             FormManager.SetForm(this);
@@ -65,28 +65,7 @@ namespace Hades_Map_Helper
                 {
 
                 }
-            }
-            /*bool createNew = false;
-            if (createNew)
-            {
-                MapData mapData = new MapData();
-                mapData.Obstacles = new List<Obstacle>();
-                projectData = new ProjectData("C:/", mapData);
-            }
-            else
-            {
-                string path = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\";
-                if (File.Exists(path + @"\A_Combat01.hades_map"))
-                {
-                    projectData = saveManager.LoadProject(path + @"\A_Combat01.hades_map");
-                }
-                else
-                {
-                    projectData = saveManager.ImportMap(path + @"\A_Combat01.map_text");
-                }
-            }
-            tabPage.CreateNewTabPage(projectData);*/
-            // Read the Application History to open what was open when closed.
+            }           
         }
     }
 }

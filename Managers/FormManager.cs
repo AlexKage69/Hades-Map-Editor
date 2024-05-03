@@ -1,7 +1,7 @@
-﻿using Hades_Map_Helper.AssetsSection;
-using Hades_Map_Helper.Components;
-using Hades_Map_Helper.Data;
-using Hades_Map_Helper.Sections;
+﻿using Hades_Map_Editor.AssetsSection;
+using Hades_Map_Editor.Components;
+using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Sections;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,11 +14,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Managers
+namespace Hades_Map_Editor.Managers
 {
     public class FormManager
     {
-        private static HadesMapHelper form;
+        private static HadesMapEditor form;
         private static FormManager _instance;
         public static FormManager GetInstance()
         {
@@ -31,7 +31,7 @@ namespace Hades_Map_Helper.Managers
         private FormManager() {
             
         }
-        public static void SetForm(HadesMapHelper forms)
+        public static void SetForm(HadesMapEditor forms)
         {
             form = forms;
         }

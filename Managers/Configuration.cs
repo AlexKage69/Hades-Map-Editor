@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper
+namespace Hades_Map_Editor
 {
     public static class Configuration
     {

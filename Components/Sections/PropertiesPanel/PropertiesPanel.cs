@@ -1,6 +1,6 @@
-﻿using Hades_Map_Helper.Data;
-using Hades_Map_Helper.Managers;
-using Hades_Map_Helper.PropertiesSection;
+﻿using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Managers;
+using Hades_Map_Editor.PropertiesSection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Sections
+namespace Hades_Map_Editor.Sections
 {
     public class PropertiesPanel: Panel, IComponent, Focusable
     {

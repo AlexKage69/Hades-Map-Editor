@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper
+namespace Hades_Map_Editor
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Hades_Map_Helper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HadesMapHelperForm());
+            Application.Run(new HadesMapEditorForm());
         }
     }
 }

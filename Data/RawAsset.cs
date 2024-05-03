@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hades_Map_Helper
+namespace Hades_Map_Editor
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class MapAssetCommon

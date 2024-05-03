@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.PropertiesSection
+namespace Hades_Map_Editor.PropertiesSection
 {
     public class PropertyCheckbox: PropertyItem<bool>, IComponent
     {

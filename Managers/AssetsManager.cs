@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Data;
+﻿using Hades_Map_Editor.Data;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hades_Map_Helper.Managers
+namespace Hades_Map_Editor.Managers
 {
     public class AssetsManager
     {

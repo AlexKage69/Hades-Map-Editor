@@ -1,6 +1,6 @@
-﻿namespace Hades_Map_Helper
+﻿namespace Hades_Map_Editor
 {
-    partial class HadesMapHelperForm
+    partial class HadesMapEditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // HadesMapHelperForm
+            // HadesMapEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1358, 848);
-            this.Name = "HadesMapHelperForm";
-            this.Text = "HadesMapHelperForm";
-            this.Load += new System.EventHandler(this.HadesMapHelperForm_Load);
+            this.Name = "HadesMapEditorForm";
+            this.Text = "HadesMapEditorForm";
+            this.Load += new System.EventHandler(this.HadesMapEditorForm_Load);
             this.ResumeLayout(false);
 
             // Make the Form an MDI parent.

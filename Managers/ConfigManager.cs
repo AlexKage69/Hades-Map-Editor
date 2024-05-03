@@ -1,4 +1,4 @@
-﻿using Hades_Map_Helper.Data;
+﻿using Hades_Map_Editor.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hades_Map_Helper.Managers
+namespace Hades_Map_Editor.Managers
 {
     public sealed class ConfigManager
     {
