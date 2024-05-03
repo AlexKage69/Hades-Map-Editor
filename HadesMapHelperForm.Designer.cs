@@ -40,6 +40,8 @@
             this.Load += new System.EventHandler(this.HadesMapHelperForm_Load);
             this.ResumeLayout(false);
 
+            // Make the Form an MDI parent.
+            IsMdiContainer = true;
         }
 
         #endregion

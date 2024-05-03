@@ -1,4 +1,5 @@
-﻿using Hades_Map_Helper.Managers;
+﻿using Hades_Map_Helper.Components;
+using Hades_Map_Helper.Managers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,35 +16,15 @@ namespace Hades_Map_Helper
 {
     public partial class HadesMapHelperForm : Form
     {
-        AssetManager assetManager;
-        PanelManager panelManager;
-        MapManager elementManager;
-
-        AssetPanel assetPanel;
-        MapPanel mapPanel;
-        ToolbarPanel toolbarPanel;
-        ElementPanel elementPanel;
-        PropertyPanel propertyPanel;
+        HadesMapHelper hmh;
         public HadesMapHelperForm()
         {
             InitializeComponent();
             //FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
 
-            // Managers
-            assetManager = new AssetManager();
-            elementManager = new MapManager(assetManager);
-            panelManager = new PanelManager(this);
-
-            //
-            assetPanel = new AssetPanel(panelManager, assetManager);
-            mapPanel = new MapPanel(panelManager, assetManager, elementManager);
-            toolbarPanel = new ToolbarPanel(panelManager);
-            elementPanel = new ElementPanel(panelManager, elementManager);
-            propertyPanel = new PropertyPanel(panelManager, elementManager);
+            hmh = new HadesMapHelper(this);
         }
-
-
 
         // Resize?
         public Size oldSize;
@@ -71,19 +52,6 @@ namespace Hades_Map_Helper
         private void HadesMapHelperForm_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             Console.WriteLine("Paint");
-        }
-        public void Select(int id, bool sourceMap = false)
-        {
-            Console.WriteLine("Select:"+id);
-            elementPanel.Select(id);
-            propertyPanel.Select(id);
-            mapPanel.Select(id, sourceMap);
-        }
-        public void Unload()
-        {
-            elementPanel.Unload();
-            propertyPanel.Unload();
-            mapPanel.Unload();
-        }
+        }        
     }
 }

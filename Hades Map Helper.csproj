@@ -36,13 +36,47 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IronPython, Version=3.4.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.3.4.1\lib\net462\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=3.4.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.3.4.1\lib\net462\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite, Version=3.4.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.3.4.1\lib\net462\IronPython.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Wpf, Version=3.4.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\IronPython.3.4.1\lib\net462\IronPython.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.4.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.3.4\lib\net452\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.3.4.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.3.4\lib\net452\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.4.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>packages\DynamicLanguageRuntime.1.3.4\lib\net452\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,29 +86,89 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\AssetManager.cs" />
-    <Compile Include="Managers\MapManager.cs" />
-    <Compile Include="Managers\PanelManager.cs" />
-    <Compile Include="Objects\AtlasJson.cs" />
+    <Compile Include="Components\HadesMapHelper.cs" />
+    <Compile Include="Components\PageComponents\CustomTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\PageComponents\CustomTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\ElementsPanel\ElementsList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\ElementsPanel\ElementsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\MapPanel\MapCanvas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\MapPanel\MapPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PagingComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\AssetsPanel\AssetTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\AssetsPanel\AssetPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\AssetsPanel\AssetsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertyTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertyInt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertyItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertyDouble.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertyCheckbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Sections\PropertiesPanel\PropertiesPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ToolsMenu\CustomContainers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ToolsMenu\CustomException.cs" />
+    <Compile Include="Components\ToolsMenu\CustomInterface.cs" />
+    <Compile Include="Components\ToolsMenu\EditTool.cs" />
+    <Compile Include="Components\WindowsMenu\BottomMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\WindowsMenu\TopMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\Assets.cs" />
+    <Compile Include="Data\RawAsset.cs" />
+    <Compile Include="Data\ProjectData.cs" />
+    <Compile Include="Data\RawAtlasJson.cs" />
+    <Compile Include="Data\MapData.cs" />
+    <Compile Include="Managers\FormManager.cs" />
+    <Compile Include="Managers\AssetsManager.cs" />
+    <Compile Include="Managers\Configuration.cs" />
+    <Compile Include="Managers\ConfigManager.cs" />
+    <Compile Include="Managers\SaveManager.cs" />
+    <Compile Include="Managers\Utility.cs" />
     <Compile Include="HadesMapHelperForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HadesMapHelperForm.Designer.cs">
       <DependentUpon>HadesMapHelperForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper.cs" />
-    <Compile Include="Objects\MapElement.cs" />
-    <Compile Include="Objects\ThingTextProperties.cs" />
-    <Compile Include="Panels\AssetPanel.cs" />
-    <Compile Include="Panels\MapPanel.cs" />
-    <Compile Include="Panels\PropertyPanel.cs" />
-    <Compile Include="Panels\ElementPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Objects\ThingText.cs" />
-    <Compile Include="Panels\ToolbarPanel.cs" />
     <EmbeddedResource Include="HadesMapHelperForm.resx">
       <DependentUpon>HadesMapHelperForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,9 +191,46 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="samples\A_Combat01.hades_map" />
+    <None Include="samples\A_Combat01.map_text" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Python\deppth\cli.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\compression.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\deppth.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\entries.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\img.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\sggpio.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\texpacking.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\utils.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\__init__.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\deppth\__main__.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\extract.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
