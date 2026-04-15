@@ -13,18 +13,18 @@ namespace Hades_Map_Editor.MapSection
 {
     public class MapCanvas : Panel, IComponent
     {
-        List<Obstacle> listOfLoadedAssets;
+        List<Obstacles> listOfLoadedAssets;
         static int X = 200, Y = 200;
         float CurrentScale = 1.0f;
         double minOffsetX, maxOffsetX, minOffsetY, maxOffsetY;
-        Obstacle selected;
+        Obstacles selected;
         Image currentImage;
         Rectangle selectRect;
         PictureBox canvas;
         ContextMenu canvasContextMenu;
         public MapCanvas()
         {
-            listOfLoadedAssets = new List<Obstacle>();
+            listOfLoadedAssets = new List<Obstacles>();
             Initialize();
             Populate();
         }
@@ -55,7 +55,7 @@ namespace Hades_Map_Editor.MapSection
             canvas.MouseDown += (s, e) => MapCanvas_MouseDown(s, e);
             canvas.ContextMenu = canvasContextMenu;
         }
-        public void AddItem(Obstacle obs)
+        public void AddItem(Obstacles obs)
         {
             listOfLoadedAssets.Add(obs);
             if (obs.Location.X != 0)
@@ -91,7 +91,7 @@ namespace Hades_Map_Editor.MapSection
                 }
             }
         }
-        public void SelectItem(Obstacle obstacle)
+        public void SelectItem(Obstacles obstacle)
         {
             selected = obstacle;
         }
@@ -102,9 +102,9 @@ namespace Hades_Map_Editor.MapSection
             Graphics finalGraphic = Graphics.FromImage(finalImage);
             FormManager formManager = FormManager.GetInstance();
             int temp = 0;
-            listOfLoadedAssets = listOfLoadedAssets.OrderByDescending((Obstacle val) => { return val.GetLayerLevel(); }).ToList();
+            listOfLoadedAssets = listOfLoadedAssets.OrderByDescending((Obstacles val) => { return val.GetLayerLevel(); }).ToList();
             finalGraphic.ScaleTransform(CurrentScale, CurrentScale);
-            foreach (Obstacle obs in listOfLoadedAssets)
+            foreach (Obstacles obs in listOfLoadedAssets)
             {
                 Asset asset;
                 formManager.GetBottomMenu().SetStatuts(obs.Name);
@@ -123,7 +123,7 @@ namespace Hades_Map_Editor.MapSection
             //BackColor = System.Drawing.Color.Transparent;
             currentImage = finalImage;
         }
-        private Rectangle GetObstacleRect(Obstacle obs)
+        private Rectangle GetObstacleRect(Obstacles obs)
         {
             Asset asset;
             if(obs.GetAsset(out asset))
@@ -158,7 +158,7 @@ namespace Hades_Map_Editor.MapSection
                 e.Graphics.DrawRectangle(blackPen, selectRect.X, selectRect.Y, selectRect.Width, selectRect.Height);
             }
         }
-        public void SetSelect(Obstacle obs)
+        public void SetSelect(Obstacles obs)
         {
             Rectangle rect = GetObstacleRect(obs);
             if(rect.X < 0)
@@ -274,7 +274,7 @@ namespace Hades_Map_Editor.MapSection
             System.Drawing.Point adjustedPoint = new System.Drawing.Point(point.X - HorizontalScroll.Value, point.Y - VerticalScroll.Value);
             canvasContextMenu.Show(this, adjustedPoint);//places the menu at the pointer position
             Console.WriteLine("Right:" + adjustedPoint.ToString());
-            var filteredList = listOfLoadedAssets.Where((Obstacle obs) => {
+            var filteredList = listOfLoadedAssets.Where((Obstacles obs) => {
                 return false;
             }).ToList();
         }

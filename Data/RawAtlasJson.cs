@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hades_Map_Editor.Data.Obstacle;
+using static Hades_Map_Editor.Data.Obstacles;
 
 namespace Hades_Map_Editor
 {

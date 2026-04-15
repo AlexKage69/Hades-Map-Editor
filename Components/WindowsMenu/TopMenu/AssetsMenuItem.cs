@@ -1,4 +1,5 @@
-﻿using Hades_Map_Editor.Managers;
+﻿using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace Hades_Map_Editor.Components
     public class AssetsMenuItem : ToolStripMenuItem, IComponent
     {
         public ToolStripMenuItem
-            createElement, createEmptyElement,
+            obstacles, createObstacle, createElement, createEmptyElement,
             fetch, compile, biomes;
         HadesMapEditor app;
         public AssetsMenuItem(HadesMapEditor app) : base("Assets")
@@ -28,10 +29,14 @@ namespace Hades_Map_Editor.Components
             ((ToolStripDropDownMenu)(DropDown)).ShowImageMargin = true;
             ((ToolStripDropDownMenu)(DropDown)).ShowCheckMargin = false;
 
+            obstacles = new ToolStripMenuItem("Obstacles");
+            createObstacle = new ToolStripMenuItem("Create Obstacle");
             fetch = new ToolStripMenuItem("Fetch Assets From Hades");
             compile = new ToolStripMenuItem("Compile Assets For Map");
             biomes = new ToolStripMenuItem("Biomes");
 
+            DropDownItems.Add(obstacles);
+            obstacles.DropDownItems.Add(createObstacle);
             DropDownItems.Add(fetch);
             DropDownItems.Add(compile);
             DropDownItems.Add(biomes);

@@ -1,4 +1,5 @@
-﻿using Hades_Map_Editor.Managers;
+﻿using Hades_Map_Editor.Components.Windows;
+using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,7 +76,7 @@ namespace Hades_Map_Editor.Components
         public void Populate()
         {
             newHadesProject.Click += NewHadesProject_Action;
-            newHadesProject.Enabled = false;
+            newHadesProject.Enabled = true;
             newHades2Project.Click += NewHades2Project_Action;
             newHades2Project.Enabled = false;
             openMapOrProject.Click += OpenMapOrProject_Action;
@@ -113,7 +114,7 @@ namespace Hades_Map_Editor.Components
         }
         private void NewHadesProject_Action(object sender, EventArgs e)
         {
-            //app.tabPage.CreateNewTabPage("New file");
+            MainWindows.ShowDialog();
         }
         private void NewHades2Project_Action(object sender, EventArgs e)
         {

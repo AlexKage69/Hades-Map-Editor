@@ -13,7 +13,7 @@ namespace Hades_Map_Editor.ElementsSection
     public class ElementsList : ListBox, IComponent, Focusable
     {
         ProjectData projectData;
-        public Dictionary<int, Obstacle> listBoxIndex;
+        public Dictionary<int, Obstacles> listBoxIndex;
         public ElementsList(ProjectData projectData)
         {
             this.projectData = projectData;
@@ -22,7 +22,7 @@ namespace Hades_Map_Editor.ElementsSection
         }
         public void Initialize()
         {
-            listBoxIndex = new Dictionary<int, Obstacle>();
+            listBoxIndex = new Dictionary<int, Obstacles>();
             Dock = DockStyle.Fill;
             MultiColumn = false;
             SelectionMode = SelectionMode.One;
@@ -38,7 +38,7 @@ namespace Hades_Map_Editor.ElementsSection
         {
             FormManager formManager = FormManager.GetInstance();
             ListBox listBox = (ListBox)sender;
-            Obstacle obs = listBoxIndex[listBox.SelectedIndex];
+            Obstacles obs = listBoxIndex[listBox.SelectedIndex];
             Console.WriteLine(obs.Id);
             formManager.GetPropertiesPanel().FocusOn(obs.Id);
             formManager.GetMapPanel().FocusOn(obs.Id);
@@ -64,7 +64,7 @@ namespace Hades_Map_Editor.ElementsSection
 
             // Determine the color of the brush to draw each item based 
             // on the index of the item to draw.
-            Obstacle obs = listBoxIndex[e.Index];
+            Obstacles obs = listBoxIndex[e.Index];
 
             if (!obs.HasAsset())
             {

@@ -22,10 +22,19 @@ namespace Hades_Map_Editor.Managers
             return _instance;
         }
         private SaveManager() { }
+        public void OpenProject(ProjectData projectData = null)
+        {
+            if(projectData == null)
+            {
+            }
+            MapData mapData = new MapData();
+            mapData.Obstacles = new List<Obstacles>();
+            SaveProject(projectData);
+        }
         public ProjectData CreateProject(string directoryPath)
         {
             MapData mapData = new MapData();
-            mapData.Obstacles = new List<Obstacle>();
+            mapData.Obstacles = new List<Obstacles>();
             ProjectData projectData =  new ProjectData(directoryPath+@"\myProject.hades_map", mapData);
             SaveProject(projectData);
 
@@ -131,12 +140,11 @@ namespace Hades_Map_Editor.Managers
             ProjectData projectData = new ProjectData(projectPath, mapData);
             SaveProject(projectData);
             return projectData;
-
         }
         private void LoadAssetsToMapData(MapData mapData)
         {
             AssetsManager assetsManager = AssetsManager.GetInstance();
-            foreach (Obstacle obs in mapData.Obstacles)
+            foreach (Obstacles obs in mapData.Obstacles)
             {
                 Asset asset;
                 if (assetsManager.GetAsset(obs.Name, out asset))

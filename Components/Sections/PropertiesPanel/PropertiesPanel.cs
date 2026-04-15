@@ -15,7 +15,7 @@ namespace Hades_Map_Editor.Sections
         private ProjectData data;
         private Label noSelectionLabel;
         private Panel attributePanel;
-        private Obstacle currentObstacle;
+        private Obstacles currentObstacle;
         PropertyCheckbox activateAtRange, active, allowMovementReaction, causesOcculsion, clutter, collision, 
             createsShadows, drawVfxOnTop, flipHorizontal, flipVertical, ignoreGridManager, invert, stopsLight,
             useBoundsForSortArea;

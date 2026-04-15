@@ -35,6 +35,26 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="IronPython, Version=3.4.1.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>packages\IronPython.3.4.1\lib\net462\IronPython.dll</HintPath>
@@ -87,9 +107,13 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\HadesMapEditor.cs" />
+    <Compile Include="Components\Windows\MainWindows.cs" />
+    <Compile Include="Components\Windows\StartupWindow.cs" />
+    <Compile Include="Components\Windows\LoadWindow.cs" />
     <Compile Include="Components\PageComponents\CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -198,11 +222,13 @@
     <Compile Include="Components\WindowsMenu\TopMenu\TopMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Data\Obstacles.cs" />
     <Compile Include="Data\Assets.cs" />
     <Compile Include="Data\RawAsset.cs" />
     <Compile Include="Data\ProjectData.cs" />
     <Compile Include="Data\RawAtlasJson.cs" />
     <Compile Include="Data\MapData.cs" />
+    <Compile Include="Managers\ObstaclesManager.cs" />
     <Compile Include="Managers\FormManager.cs" />
     <Compile Include="Managers\AssetsManager.cs" />
     <Compile Include="Managers\Configuration.cs" />

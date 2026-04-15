@@ -1,5 +1,6 @@
 ﻿using Hades_Map_Editor.Components;
 using Hades_Map_Editor.Components.Dialogs;
+using Hades_Map_Editor.Components.Windows;
 using Hades_Map_Editor.Data;
 using Hades_Map_Editor.Managers;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,7 +47,7 @@ namespace Hades_Map_Editor
             //assetManager = new AssetManager();
             //mapManager = new MapManager(assetManager);
             //panelManager = new PanelManager(form);
-
+            FormManager formManager = FormManager.GetInstance();
             // Panels
             //assetPanel = new AssetPanel(panelManager, assetManager);
             //mapPanel = new MapPanel(app);
@@ -57,8 +59,10 @@ namespace Hades_Map_Editor
             form.Controls.Add(topMenuStrip);
             form.Controls.Add(bottomMenuStrip);
 
+            //obstacleManager.CompileObstacles();
+
             //ProjectData projectData;
-            SaveManager saveManager = SaveManager.GetInstance();
+            /*SaveManager saveManager = SaveManager.GetInstance();
             foreach (string path in configManager.GetAllProjectPath())
             {
                 try
@@ -69,7 +73,7 @@ namespace Hades_Map_Editor
                 {
                     Console.WriteLine(e.ToString());
                 }
-            }           
+            }      */
         }
     }
 }

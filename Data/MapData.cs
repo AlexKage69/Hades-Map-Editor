@@ -12,18 +12,18 @@ namespace Hades_Map_Editor.Data
 {
     public class MapData
     {
-        public List<Obstacle> Obstacles { get; set; }
+        public List<Obstacles> Obstacles { get; set; }
 
-        public List<Obstacle> GetActiveObstacles()
+        public List<Obstacles> GetActiveObstacles()
         {
             return Obstacles.FindAll((obs) => { return obs.Active; });
         }
-        public Obstacle GetFromId(int id)
+        public Obstacles GetFromId(int id)
         {
-            return Obstacles.Find((Obstacle val1) => { return val1.Id == id; });
+            return Obstacles.Find((Obstacles val1) => { return val1.Id == id; });
         }
     }
-    public class Obstacle
+    public class Obstacles
     {
         public bool ActivateAtRange { get; set; }
         public double ActivationRange { get; set; }

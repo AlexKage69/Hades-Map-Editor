@@ -1,4 +1,5 @@
 ﻿using Hades_Map_Editor.Components;
+using Hades_Map_Editor.Components.Windows;
 using Hades_Map_Editor.Managers;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static IronPython.Modules._ast;
 
 namespace Hades_Map_Editor
 {
@@ -24,12 +26,17 @@ namespace Hades_Map_Editor
             WindowState = FormWindowState.Maximized;
 
             hmh = new HadesMapEditor(this);
+            Load += Window_Loaded;
+        }
+
+        private void Window_Loaded(object sender, EventArgs e)
+        {
+            MainWindows.ShowStartupWindow();
         }
 
         // Resize?
         public Size oldSize;
         private void HadesMapEditorForm_Load(object sender, EventArgs e) => oldSize = base.Size;
-
         protected override void OnResize(System.EventArgs e)
         {
             base.OnResize(e);

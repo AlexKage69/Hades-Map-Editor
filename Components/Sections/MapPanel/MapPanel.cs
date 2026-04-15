@@ -91,7 +91,7 @@ namespace Hades_Map_Editor.Sections
         }
         public void FocusOn(int id)
         {
-            Obstacle obs = data.mapData.GetFromId(id);
+            Obstacles obs = data.mapData.GetFromId(id);
             //Size size = canvas;
             //Add rectangle
 
@@ -116,7 +116,7 @@ namespace Hades_Map_Editor.Sections
         public void GetData()
         {
                 AssetsManager assetsManager = AssetsManager.GetInstance();
-                foreach (Obstacle obs in data.mapData.Obstacles)
+                foreach (Obstacles obs in data.mapData.Obstacles)
                 {
                     Asset asset;
                     if (assetsManager.GetAsset(obs.Name, out asset))
