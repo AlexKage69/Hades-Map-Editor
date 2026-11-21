@@ -1,13 +1,14 @@
 ﻿using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Data.Asset;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hades_Map_Editor.Data.Obstacle;
+using static Hades_Map_Editor.Data.Map.Obstacle;
 
-namespace Hades_Map_Editor
+namespace Hades_Map_Editor.Data.Raw
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class RawAtlasJson
@@ -22,17 +23,17 @@ namespace Hades_Map_Editor
         {
             return name.Split('\\').Last();
         }
-        public void AppendAssets(BiomeAssetData biomeAssetData)
+        public void AppendAssets(BiomeData biomeAssetData)
         {
             var assets = biomeAssetData.assetsData;
             if (subAtlases != null && subAtlases.Count > 0){
                 MapAssetCommon parent = new MapAssetCommon(this);
                 foreach (var assetSub in subAtlases)
                 {
-                    Asset asset =  new Asset(parent, assetSub);
+                    AssetData asset =  new AssetData(parent, assetSub);
                     if (!assets.ContainsKey(asset.type))
                     {
-                        Dictionary<string, Asset> list = new Dictionary<string, Asset>();
+                        Dictionary<string, AssetData> list = new Dictionary<string, AssetData>();
                         assets.Add(asset.type, list);
                     }
                     if (!assets[asset.type].ContainsKey(asset.name))
@@ -111,7 +112,7 @@ namespace Hades_Map_Editor
         {
             return name.Split('\\').Last().Replace("_", "");
         }
-        public bool IsBetterThan(Asset asset)
+        public bool IsBetterThan(AssetData asset)
         {
             return Math.Abs(asset.scaleRatio.x - 1.0) < Math.Abs(scaleRatio.x - 1.0);
         }

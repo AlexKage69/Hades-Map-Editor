@@ -1,4 +1,5 @@
-﻿using Hades_Map_Editor.Managers;
+﻿using Hades_Map_Editor.Data.Asset;
+using Hades_Map_Editor.Managers;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using static IronPython.Modules._ast;
 
-namespace Hades_Map_Editor.Data
+namespace Hades_Map_Editor.Data.Map
 {
     public class MapData
     {
         public List<Obstacle> Obstacles { get; set; }
+
+        public MapData()
+        {
+            Obstacles = new List<Obstacle>();
+        }
         public List<Obstacle> GetAllObstacles(bool withAsset = false)
         {
             if (withAsset)
@@ -89,18 +95,18 @@ namespace Hades_Map_Editor.Data
         public bool UseBoundsForSortArea { get; set; }
         public double Value { get; set; }
         private bool hidden;
-        private Asset asset;
+        private AssetData asset;
         private Size dimension;
         private Color pColor;
         private Point pLocation;
         public int GetLayerLevel()
         {
-            GetAsset(out Asset asset);
+            GetAsset(out AssetData asset);
             if (asset.name.Contains("TartarusTerrainBrickSquare")) {  return 1; }
             return (int)Location.Y+ dimension.Height;
                 //(int)Value*100;
         }
-        public bool GetAsset(out Asset asset)
+        public bool GetAsset(out AssetData asset)
         {
             asset = this.asset;
             return HasAsset();
@@ -109,7 +115,7 @@ namespace Hades_Map_Editor.Data
         {
             return asset != null;
         }
-        public void SetAsset(Asset asset)
+        public void SetAsset(AssetData asset)
         {
             this.asset = asset;
             dimension = new Size((int)(asset.rect.width * Scale * asset.scaleRatio.x), (int)(asset.rect.height * Scale * asset.scaleRatio.y));

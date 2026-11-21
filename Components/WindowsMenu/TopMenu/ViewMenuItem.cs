@@ -168,6 +168,10 @@ namespace Hades_Map_Editor.TopMenu
         {
             FormManager formManager = FormManager.GetInstance();
             ProjectPage pp = formManager.GetCurrentTab();
+            if(pp == null)
+            {
+                return;
+            }
             pp.ToggleAssetsPanel();
             showAssetWindow.Checked = pp.IsAssetsPanelOpen();
         }
@@ -177,6 +181,10 @@ namespace Hades_Map_Editor.TopMenu
             FormManager formManager = FormManager.GetInstance();
             ProjectPage pp = formManager.GetCurrentTab();
             pp.ToggleElementsPanel();
+            if (pp == null)
+            {
+                return;
+            }
             showAssetWindow.Checked = pp.IsElementsPanelOpen();
         }
 
@@ -184,6 +192,10 @@ namespace Hades_Map_Editor.TopMenu
         {
             FormManager formManager = FormManager.GetInstance();
             ProjectPage pp = formManager.GetCurrentTab();
+            if (pp == null)
+            {
+                return;
+            }
             pp.TogglePropertiesPanel();
             showAssetWindow.Checked = pp.IsPropertiesPanelOpen();
         }
@@ -198,6 +210,10 @@ namespace Hades_Map_Editor.TopMenu
             Console.WriteLine("Map Clicked");
             FormManager formManager = FormManager.GetInstance();
             ProjectPage pp = formManager.GetCurrentTab();
+            if (pp == null)
+            {
+                return;
+            }
             showAssetWindow.Checked = pp.IsAssetsPanelOpen();
             showElementWindow.Checked = pp.IsElementsPanelOpen();
             showPropertyWindow.Checked = pp.IsPropertiesPanelOpen();

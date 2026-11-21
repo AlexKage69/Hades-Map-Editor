@@ -46,7 +46,9 @@ namespace Hades_Map_Editor.ElementsSection
 
         private void SelectBiome_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            
+            Console.WriteLine(hideUnassigned.Checked);
+            parent.listBox.filterUnassignedAsset = hideUnassigned.Checked;
+            parent.Refresh();
         }
 
         public void RefreshData()

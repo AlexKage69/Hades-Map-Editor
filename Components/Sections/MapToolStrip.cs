@@ -25,9 +25,9 @@ namespace Hades_Map_Editor
         public void Initialize()
         {
             // Add items to the ToolStrip.
-            Items.Add("One");
-            Items.Add("Two");
-            Items.Add("Three");
+            Items.Add("Create New Obstacle");
+            Items.Add("Flip");
+            Items.Add("Resize");
 
             // Add items to the ToolStrip.
             zoomOut = new ToolStripMenuItem();
@@ -41,7 +41,6 @@ namespace Hades_Map_Editor
             Items.Add(zoomIn);
             Items.Add(zoomOut);
             // Add the ToolStrip to the top panel of the ToolStripContainer.
-            
         }
 
         public void Populate(){ }

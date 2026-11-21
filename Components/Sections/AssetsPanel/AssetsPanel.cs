@@ -1,5 +1,5 @@
 ﻿using Hades_Map_Editor.AssetsSection;
-using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Data.Asset;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Hades_Map_Editor.AssetsSection
             Initialize();
             Populate();
         }
-        public void Initialize()
+        public new void Initialize()
         {
             
             assetMenu = new AssetMenu(this);
@@ -37,26 +37,30 @@ namespace Hades_Map_Editor.AssetsSection
             ContentPanel.Controls.Add(emptyAssetPanel);
             ContentPanel.Controls.Add(assetTable);
         }
-        public void Populate()
+        public new void Populate()
         {
             RefreshData();
             closeButton.Click += CloseButton_Click;
             assetTable.Visible = false;
 
-            ShowAssetTable(assetMenu.selectBiomeDropdown.Items[0].ToString());
+            /*if(assetMenu.selectBiomeDropdown.Items.Count > 0)
+            {
+                ShowAssetTable(assetMenu.selectBiomeDropdown.Items[0].ToString());
+            }*/
         }
 
         public void RefreshData()
         {
             AssetsManager am = AssetsManager.GetInstance();
-            if (am.HasAssets())
+            /*if (am.HasAssets())
             {
                 emptyAssetPanel.Visible = false;
             }
             else
             {
                 emptyAssetPanel.Visible = true;
-            }
+            }*/
+            emptyAssetPanel.Visible = false;
             assetMenu.RefreshData();
         }
         private void CloseButton_Click(object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace Hades_Map_Editor.AssetsSection
                 assetMenu.selectBiomeDropdown.SelectedItem = biomeName;
             }
             AssetsManager am = AssetsManager.GetInstance();
-            List<Asset> list = am.GetBiomeAssets(biomeName).GetAssetsByType(AssetType.Tilesets);
+            List<AssetData> list = am.GetBiomeAssets(biomeName).GetAssetsByType(AssetType.Tilesets);
             paging.SetupPaging((int)Math.Ceiling((double)list.Count / (maxRow * maxColumn)));
             assetTable.LoadItems(list);
             assetTable.Visible = true;

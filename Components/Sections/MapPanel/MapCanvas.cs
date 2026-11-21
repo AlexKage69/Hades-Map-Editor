@@ -1,4 +1,5 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Map;
+using Hades_Map_Editor.Data.Asset;
 using Hades_Map_Editor.ElementsSection;
 using Hades_Map_Editor.Managers;
 using System;
@@ -107,7 +108,7 @@ namespace Hades_Map_Editor.MapSection
             finalGraphic.ScaleTransform(CurrentScale, CurrentScale);
             foreach (Obstacle obs in listOfLoadedAssets)
             {
-                Asset asset;
+                AssetData asset;
                 formManager.GetBottomMenu().SetStatuts(obs.Name);
                 if (!obs.Active || !obs.GetAsset(out asset))
                 {
@@ -126,7 +127,7 @@ namespace Hades_Map_Editor.MapSection
         }
         private Rectangle GetObstacleRect(Obstacle obs, bool withCanvasScale = false)
         {
-            Asset asset;
+            AssetData asset;
             float scale = (withCanvasScale) ? CurrentScale : 1.0f;
             if(obs.GetAsset(out asset))
             {
@@ -274,7 +275,7 @@ namespace Hades_Map_Editor.MapSection
         {
             foreach (var obstacle in listOfLoadedAssets)
             {
-                Asset asset;
+                AssetData asset;
                 if (obstacle.GetAsset(out asset))
                 {
                     //asset.rect.x

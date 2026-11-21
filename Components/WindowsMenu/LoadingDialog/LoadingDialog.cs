@@ -13,7 +13,7 @@ namespace Hades_Map_Editor.Components.Dialogs
     {
         Label loadingText;
         ProgressBar progressBar;
-        BackgroundWorker bw;
+        //BackgroundWorker bw;
         public LoadingDialog()
         {
             Initialize();

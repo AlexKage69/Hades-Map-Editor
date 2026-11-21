@@ -1,4 +1,6 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Asset;
+using Hades_Map_Editor.Data.Map;
+using Hades_Map_Editor.Data.Project;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,28 @@ namespace Hades_Map_Editor.Managers
     public sealed class IOManager
     {
         private static IOManager _instance;
+        public static FileDialogConfig DefaultCreateProject, DefaultLoadProject, DefaultImportThingBin;
+        public struct FileDialogConfig
+        {
+            public bool IsOpen;
+            public string InitialDirectory;
+            public string Title;
+            public string DefaultExt;
+            public string Filter;
+            public bool CheckFileExists;
+            public bool CheckPathExists;
+
+            public FileDialogConfig(bool IsOpen, string InitialDirectory, string Title, string DefaultExt, string Filter, bool CheckFileExists, bool CheckPathExists)
+            {
+                this.IsOpen = IsOpen;
+                this.InitialDirectory = InitialDirectory;
+                this.Title = Title;
+                this.DefaultExt = DefaultExt;
+                this.Filter = Filter;
+                this.CheckFileExists = CheckFileExists;
+                this.CheckPathExists = CheckPathExists;
+            }
+        }
         public static IOManager GetInstance()
         {
             if (_instance == null)
@@ -21,77 +45,89 @@ namespace Hades_Map_Editor.Managers
             }
             return _instance;
         }
-        private IOManager() { }
-        public ProjectData CreateProject(string directoryPath)
+        private IOManager() {
+            //DefaultCreateProject = new FileDialogConfig (false, projectPath, "Create new project", "hades_map", "hades projects (*.hades_map)|*.hades_map", false, true);
+            //DefaultLoadProject = new FileDialogConfig(true, projectPath, "Load project", "hades_map", "hades projects (*.hades_map, *.hades2_map)|*.hades_map, *.hades2_map", true, true);
+            //DefaultImportThingBin = new FileDialogConfig(true, projectPath, "Import .thing_bin", "hades_map", "thing_bin (*.thing_bin)|*.thing_bin", true, true);
+        }
+        public string GetFileDialog(FileDialogConfig config)
         {
-            MapData mapData = new MapData();
-            mapData.Obstacles = new List<Obstacle>();
-            ProjectData projectData =  new ProjectData(directoryPath+@"\myProject.hades_map", mapData);
-            SaveProject(projectData);
+            string path = "";
+            FileDialog fileDialog;
+            if (config.IsOpen) {
+                fileDialog = new OpenFileDialog();
+            } else {
+                fileDialog = new SaveFileDialog();
+            }
+            fileDialog.InitialDirectory = config.InitialDirectory;
+            fileDialog.Title = config.Title;
 
-            return projectData;
+            fileDialog.CheckFileExists = config.CheckFileExists;
+            fileDialog.CheckPathExists = config.CheckPathExists;
+            
+            fileDialog.DefaultExt = config.DefaultExt;
+            fileDialog.Filter = config.Filter;
+            fileDialog.FilterIndex = 2;
+            fileDialog.RestoreDirectory = true;
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = fileDialog.FileName;
+            }
+            if(path == "")
+            {
+                throw (new Exception());
+            }
+            return path;
+        }
+        public string GetFolderDialog(string initialPath, string description)
+        {
+            string path = "";
+            FolderBrowserDialog folderDialog;
+            folderDialog = new FolderBrowserDialog();
+            folderDialog.SelectedPath = initialPath;
+            folderDialog.Description = description;
+
+            folderDialog.ShowNewFolderButton = true;
+
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = folderDialog.SelectedPath;
+            }
+            if (path == "")
+            {
+                throw (new Exception());
+            }
+            return path;
         }
         public void SaveProject(ProjectData projectData)
         {
-            if (projectData.projectPath == "")
+            ConfigManager config = ConfigManager.GetInstance();
+            if (!Directory.Exists(projectData.projectPath))
             {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog
+                Console.WriteLine("Missing: " + projectData.projectPath);
+                config.RemoveProjectPath(projectData.projectPath);
+            }
+            else
+            {
+                try
                 {
-                    InitialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\",
-                    Title = "Browse Map Texts",
-
-                    CheckFileExists = true,
-                    CheckPathExists = true,
-
-                    DefaultExt = "hades_map",
-                    Filter = "map texts (*.hades_map)|*.hades_map",
-                    FilterIndex = 2,
-                    RestoreDirectory = true,
-                };
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    using (StreamWriter file = new StreamWriter(projectData.projectPath))
+                    {
+                        string json = JsonConvert.SerializeObject(projectData);
+                        file.Write(json);
+                    }
+                    config.AddProjectPath(projectData.projectPath);
+                }
+                catch (Exception)
                 {
-                    projectData.projectPath = saveFileDialog1.FileName;
+                    config.RemoveProjectPath(projectData.projectPath);
                 }
             }
-            using (StreamWriter file = new StreamWriter(projectData.projectPath))
-            {
-                string json = JsonConvert.SerializeObject(projectData);
-                file.Write(json);
-            }
-            ConfigManager config = ConfigManager.GetInstance();
-            config.AddProjectPath(projectData.projectPath);
         }
-        public ProjectData LoadProject(string path = "")
+        public ProjectData LoadProject(string path)
         {
             ProjectData projectData;
-            if (path == "")
-            {
-                OpenFileDialog openFileDialog1 = new OpenFileDialog
-                {
-                    InitialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\",
-                    Title = "Browse Map Texts",
-
-                    CheckFileExists = true,
-                    CheckPathExists = true,
-
-                    DefaultExt = "hades_map",
-                    Filter = "map texts (*.hades_map)|*.hades_map",
-                    FilterIndex = 2,
-                    RestoreDirectory = true,
-
-                    ReadOnlyChecked = true,
-                    ShowReadOnly = true
-                };
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    path = openFileDialog1.FileName;
-                }
-            }
-            if(path == "") // Didn't load
-            {
-                throw new NoFileLoadedException();
-            }
             if (!File.Exists(path))
             {
                 throw new NoFileLoadedException();
@@ -104,26 +140,19 @@ namespace Hades_Map_Editor.Managers
             LoadAssetsToMapData(projectData.mapData);
             ConfigManager config = ConfigManager.GetInstance();
             config.AddProjectPath(projectData.projectPath);
-            return projectData;            
+            return projectData;
         }
-        public void ExportMap(MapData mapData)
+        public void SaveJson(string path, object obj)
         {
-
+            using (StreamWriter file = new StreamWriter(path))
+            {
+                string json = JsonConvert.SerializeObject(obj);
+                file.Write(json);
+            }
         }
         public ProjectData ImportMap(string mapPath)
         {
             MapData mapData;
-            if (mapPath == "")
-            {
-                try
-                {
-                    mapPath = OpenFile("Browse Map Texts", "map_text", "map texts (*.map_text)|*.map_text");
-                }
-                catch (NoFileLoadedException e)
-                {
-                    throw e;
-                }                         
-            }
             using (StreamReader r = new StreamReader(mapPath))
             {
                 string json = r.ReadToEnd();
@@ -141,7 +170,7 @@ namespace Hades_Map_Editor.Managers
             AssetsManager assetsManager = AssetsManager.GetInstance();
             foreach (Obstacle obs in mapData.Obstacles)
             {
-                Asset asset;
+                AssetData asset;
                 if (assetsManager.GetAsset(obs.Name, out asset))
                 {
                     obs.SetAsset(asset);
@@ -151,7 +180,7 @@ namespace Hades_Map_Editor.Managers
         public void SaveAssets(AssetData _assets)
         {
             ConfigManager configManager = ConfigManager.GetInstance();
-            using (StreamWriter file = new StreamWriter(configManager.GetPath(ConfigType.ResourcesPath) + @"\assets.json"))
+            using (StreamWriter file = new StreamWriter(configManager.GetConfigurations().resourcesPath + @"\MetaAssets.json"))
             {
                 string json = JsonConvert.SerializeObject(_assets);
                 file.Write(json);
@@ -161,9 +190,10 @@ namespace Hades_Map_Editor.Managers
         {
             AssetData assets;
             ConfigManager configManager = ConfigManager.GetInstance();
-            if (File.Exists(configManager.GetPath(ConfigType.ResourcesPath) + @"\assets.json"))
+            string assetsPath = configManager.GetConfigurations().resourcesPath;
+            if (File.Exists(assetsPath))
             {
-                using (StreamReader r = new StreamReader(configManager.GetPath(ConfigType.ResourcesPath) + @"\assets.json"))
+                using (StreamReader r = new StreamReader(assetsPath))
                 {
                     string json = r.ReadToEnd();
                     assets = JsonConvert.DeserializeObject<AssetData>(json);
@@ -172,46 +202,14 @@ namespace Hades_Map_Editor.Managers
             }
             else
             {
-                throw new Exception("Missing assets file");
+                assets = new AssetData();
+                using (StreamWriter file = new StreamWriter(assetsPath))
+                {
+                    string json = JsonConvert.SerializeObject(assets);
+                    file.Write(json);
+                }
             }
             return assets;
-        }
-        private string OpenFile(
-            string title = "Browse Files",
-            string defaultExt = "hades_map",
-            string filter = "map texts (*.hades_map)|*.hades_map",
-            string initialDirectory = @"C:\Users\Alexandre-i5\source\repos\Hades Map Helper\test_data\sample\"    
-            )
-        {
-            string path = "";
-            OpenFileDialog openFileDialog1 = new OpenFileDialog
-            {
-                InitialDirectory = initialDirectory,
-                Title = title,
-
-                CheckFileExists = true,
-                CheckPathExists = true,
-
-                DefaultExt = defaultExt,
-                Filter = filter,
-                FilterIndex = 2,
-                RestoreDirectory = true,
-
-                ReadOnlyChecked = true,
-                ShowReadOnly = true
-            };
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                path = openFileDialog1.FileName;
-            }
-            if(path == "")
-            {
-                throw new NoFileLoadedException();
-            }
-            else
-            {
-                return path;
-            }
         }
     }
 }

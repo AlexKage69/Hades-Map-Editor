@@ -1,7 +1,7 @@
 ﻿using Hades_Map_Editor.BottomMenu;
 using Hades_Map_Editor.Components;
 using Hades_Map_Editor.Components.Dialogs;
-using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Data.Project;
 using Hades_Map_Editor.Managers;
 using Hades_Map_Editor.TopMenu;
 using System;
@@ -39,30 +39,17 @@ namespace Hades_Map_Editor
             bottomMenuStrip = new BottomMenuStrip();
 
             ConfigManager configManager = ConfigManager.GetInstance();
-            //configManager.SetConfig("ProjectPath", "", true);
-            // Managers
-            //assetManager = new AssetManager();
-            //mapManager = new MapManager(assetManager);
-            //panelManager = new PanelManager(form);
-
-            // Panels
-            //assetPanel = new AssetPanel(panelManager, assetManager);
-            //mapPanel = new MapPanel(app);
-            //toolbarPanel = new ToolbarPanel(panelManager);
-            //elementPanel = new ElementPanel(panelManager, elementManager);
-            //propertyPanel = new PropertyPanel(panelManager, elementManager);
 
             form.Controls.Add(tabPage);
             form.Controls.Add(topMenuStrip);
             form.Controls.Add(bottomMenuStrip);
 
-            //ProjectData projectData;
-            IOManager saveManager = IOManager.GetInstance();
+            IOManager io = IOManager.GetInstance();
             foreach (string path in configManager.GetAllProjectPath())
             {
                 try
                 {
-                    ProjectData projectData = saveManager.LoadProject(path);
+                    ProjectData projectData = io.LoadProject(path);
                     tabPage.CreateNewTabPage(projectData);
                 }catch(Exception e)
                 {

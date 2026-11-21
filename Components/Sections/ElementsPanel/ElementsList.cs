@@ -1,4 +1,4 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Map;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace Hades_Map_Editor.ElementsSection
     {
         public Dictionary<int, Obstacle> listBoxIndex;
         public ElementsPanel parent;
+        public bool filterUnassignedAsset;
         public ElementsList(ElementsPanel parent)
         {
             this.parent = parent;
@@ -23,6 +24,7 @@ namespace Hades_Map_Editor.ElementsSection
         }
         public void Initialize()
         {
+            filterUnassignedAsset = false;
             listBoxIndex = new Dictionary<int, Obstacle>();
             Dock = DockStyle.Fill;
             MultiColumn = false;
@@ -103,7 +105,7 @@ namespace Hades_Map_Editor.ElementsSection
         {
             Obstacle obs = listBoxIndex[e.Index];
             e.ItemHeight = 13;
-            if (!obs.HasAsset())
+            if (!obs.HasAsset() && filterUnassignedAsset)
             {
                 e.ItemHeight = 0;
             }

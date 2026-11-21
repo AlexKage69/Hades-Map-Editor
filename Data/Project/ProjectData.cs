@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hades_Map_Editor.Managers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,8 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hades_Map_Editor.Data.Map;
 
-namespace Hades_Map_Editor.Data
+namespace Hades_Map_Editor.Data.Project
 {
     public class ProjectData
     {
@@ -15,12 +17,13 @@ namespace Hades_Map_Editor.Data
         public string name;
         public string mapbiome;
         public MapData mapData;
-
-        public ProjectData(string projectPath, MapData mapData)
+        public ProjectData(string projectPath, MapData mapData = null)
         {
-            this.mapData = mapData;
+            this.mapData = (mapData == null) ?new MapData(): mapData;
             this.projectPath = projectPath;
             name = Path.GetFileNameWithoutExtension(projectPath);
+            IOManager iOManager = IOManager.GetInstance();
+            iOManager.SaveProject(this);
         }
         /*public void OpenMap(string mapPath)
         {

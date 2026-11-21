@@ -1,77 +1,22 @@
 ﻿using Hades_Map_Editor.Managers;
+using Hades_Map_Editor.Data.Map;
+using Hades_Map_Editor.Data.Raw;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hades_Map_Editor.Data.Obstacle;
+using static Hades_Map_Editor.Data.Map.Obstacle;
 
-namespace Hades_Map_Editor.Data
+namespace Hades_Map_Editor.Data.Asset
 {
     public class AssetData
     {
-        public Dictionary<string, BiomeAssetData> biomeData;
-        public AssetData()
-        {
-            biomeData = new Dictionary<string, BiomeAssetData>();
-        }
-        public void LoadImages(string selectedBiome = "all")
-        {
-            if (selectedBiome == "all")
-            {
-                foreach (var biome in biomeData)
-                {
-                    foreach (var type in biome.Value.assetsData)
-                    {
-                        foreach (var asset in type.Value)
-                        {
-                            asset.Value.LoadImage();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if(biomeData.ContainsKey(selectedBiome))
-                {
-                    foreach (var type in biomeData[selectedBiome].assetsData)
-                    {
-                        foreach (var asset in type.Value)
-                        {
-                            asset.Value.LoadImage();
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public class BiomeAssetData
-    {
-        public Dictionary<AssetType, Dictionary<string, Asset>> assetsData;
-        public BiomeAssetData()
-        {
-            assetsData = new Dictionary<AssetType, Dictionary<string, Asset>> ();
-        }
-        public List<Asset> GetAssets()
-        {
-            List<Asset> list = new List<Asset>();
-            foreach (var assetList in assetsData.Values)
-            {
-                list.AddRange(assetList.Values);
-            }
-            return list;
-        }
-        public List<Asset> GetAssetsByType(AssetType type)
-        {
-            return assetsData[type].Values.ToList();
-        }
-    }
-    public class Asset
-    {
         public AssetType type { get; set; }
         public string biome { get; set; }
-        public string assetpath { get; set; }
+        public GameVersion gameVersion { get; set; }
+        public string filename { get; set; }
         public string name { get; set; }
         public JsonRect rect
         {
@@ -119,12 +64,12 @@ namespace Hades_Map_Editor.Data
         {
             return pOriginalSize;
         }
-        public Asset() { }
-        public Asset(MapAssetCommon parent, SubAtlaseJson json)
+        public AssetData() { }
+        public AssetData(MapAssetCommon parent, SubAtlaseJson json)
         {
-            ConfigManager configManager = ConfigManager.GetInstance();            
+            gameVersion = GameVersion.Hades;
             biome = parent.name.Split('\\').Last().Split('_').First();
-            assetpath = configManager.GetPath(ConfigType.ResourcesPath) + @"\" + biome + @"\textures\atlases\" + parent.GetName() + ".png";
+            filename = parent.GetName();
             name = json.name.Split('\\').Last().Replace("_", "");
             pRect = json.GetRect();
             pTopLeft = json.GetTopLeft();
@@ -157,9 +102,14 @@ namespace Hades_Map_Editor.Data
         {
             if (image == null)
             {
-                return Utility.LoadImage(assetpath, GetRect());
+                return Utility.LoadImage(GetAssetPath(), GetRect());
             }
             throw new Exception("Couldn't load image");
+        }
+        public string GetAssetPath()
+        {
+            ConfigManager configManager = ConfigManager.GetInstance();
+            return configManager.GetConfigurations().resourcesPath + @"\" + gameVersion.ToString() + @"\" + biome + @"\textures\atlases\" + filename + ".png"; ;
         }
     }
     public enum AssetType

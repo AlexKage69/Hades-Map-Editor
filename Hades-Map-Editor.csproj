@@ -206,11 +206,13 @@
     <Compile Include="Components\WindowsMenu\TopMenu\TopMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data\AssetData.cs" />
-    <Compile Include="Data\RawAsset.cs" />
-    <Compile Include="Data\ProjectData.cs" />
-    <Compile Include="Data\RawAtlasJson.cs" />
-    <Compile Include="Data\MapData.cs" />
+    <Compile Include="Data\Asset\AssetData.cs" />
+    <Compile Include="Data\Asset\BiomeData.cs" />
+    <Compile Include="Data\Project\ConfigurationSave.cs" />
+    <Compile Include="Data\Raw\RawAsset.cs" />
+    <Compile Include="Data\Project\ProjectData.cs" />
+    <Compile Include="Data\Raw\RawAtlasJson.cs" />
+    <Compile Include="Data\Map\MapData.cs" />
     <Compile Include="Managers\FormManager.cs" />
     <Compile Include="Managers\AssetsManager.cs" />
     <Compile Include="Managers\Configuration.cs" />
@@ -248,6 +250,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Python\HadesMapper\README.md" />
     <None Include="samples\A_Combat01.hades_map" />
     <None Include="samples\A_Combat01.map_text" />
     <None Include="samples\MapObstacle\1_DevObstacles.sjson" />
@@ -275,6 +278,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Python\assets_extract_h1.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\assets_extract_h2.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Python\deppth\cli.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -305,7 +314,16 @@
     <Content Include="Python\deppth\__main__.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Python\extract.py">
+    <Content Include="Python\HadesMapper\.gitattributes" />
+    <Content Include="Python\HadesMapper\HadesMapper\cli.py" />
+    <Content Include="Python\HadesMapper\HadesMapper\HadesMapper.py" />
+    <Content Include="Python\HadesMapper\HadesMapper\__init__.py" />
+    <Content Include="Python\HadesMapper\HadesMapper\__main__.py" />
+    <Content Include="Python\HadesMapper\setup.py" />
+    <Content Include="Python\map_decode_h1.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\map_encode_h1.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Res\browse_button.png">

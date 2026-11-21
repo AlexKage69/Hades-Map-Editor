@@ -74,6 +74,9 @@ namespace Hades_Map_Editor.Managers
         }
         public ProjectPage GetCurrentTab()
         {
+            if(form.tabPage.tabPages.Count <= 0){
+                return null;
+            }
             return form.tabPage.tabPages[form.tabPage.SelectedIndex];
         }
         public TopMenuStrip GetTopMenu()

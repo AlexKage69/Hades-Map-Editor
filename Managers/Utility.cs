@@ -16,6 +16,9 @@ namespace Hades_Map_Editor
         public static Image LoadImage(string filePath, Rectangle cropArea)
         {
             Bitmap copy;
+            if(!File.Exists(filePath)){
+                return new Bitmap(1, 1);
+            }
             using (var stream = File.OpenRead(filePath))
             {
                 Bitmap orig = (Bitmap)Bitmap.FromStream(stream);
@@ -64,5 +67,16 @@ namespace Hades_Map_Editor
         {
             return path.Split('\\').Last();
         }
+    }
+    public enum GameVersion
+    {
+        Hades,
+        Hades2,
+    }
+    public enum ConfigPathType
+    {
+        Resources,
+        Python,
+        Project,
     }
 }

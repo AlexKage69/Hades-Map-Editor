@@ -14,9 +14,10 @@ namespace Hades_Map_Editor.AssetsSection
     {
         Button loadButton, fetchButton;
         Label messageLabel;
+        AssetsPanel parent;
         public EmptyAssetPanel(AssetsPanel assetsPanel)
         {
-            Parent = assetsPanel;
+            parent = assetsPanel;
             Initialize();
             Populate();
         }
@@ -62,7 +63,7 @@ namespace Hades_Map_Editor.AssetsSection
         private void FetchButton_Click(object sender, EventArgs e)
         {
             FormManager formManager = FormManager.GetInstance();
-            formManager.StartLoading(new FetchAssetWorker());
+            formManager.StartLoading(new FetchAssetWorker(GameVersion.Hades));
             loadButton.Enabled = true;
             fetchButton.Enabled = false;
         }

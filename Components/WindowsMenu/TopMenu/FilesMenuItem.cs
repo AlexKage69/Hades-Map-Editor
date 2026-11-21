@@ -1,4 +1,5 @@
 ﻿using Hades_Map_Editor.Components.Dialogs;
+using Hades_Map_Editor.Data.Project;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace Hades_Map_Editor.TopMenu
     public class FilesMenuItem : ToolStripMenuItem, IComponent
     {
         public ToolStripMenuItem
-            newProject, newHadesProject, newHades2Project, openMapOrProject, tempImport, recentProjects,
+            newProject, newHadesProject, openMapOrProject, /*tempImport,*/ recentProjects,
             save, saveAs, saveAll, export, exportAs, exportAsImage, 
             close, closeAll, parameters, exit;
-        ParametersDialog parametersDialog;
+        //ParametersDialog parametersDialog;
         public FilesMenuItem() : base("Files")
         {
             Initialize();
@@ -31,10 +32,9 @@ namespace Hades_Map_Editor.TopMenu
             ((ToolStripDropDownMenu)(DropDown)).ShowCheckMargin = false;
 
             newProject = new ToolStripMenuItem("New");
-            newHadesProject = new ToolStripMenuItem("New Hades Project");
-            newHades2Project = new ToolStripMenuItem("New Hades 2 Project");
-            openMapOrProject = new ToolStripMenuItem("Open .thing_text/.hades_map");
-            tempImport = new ToolStripMenuItem("Open .thing_text (Temporary)");
+            newHadesProject = new ToolStripMenuItem("New Hades Map Project");
+            openMapOrProject = new ToolStripMenuItem("Create from .thing_bin");
+            //tempImport = new ToolStripMenuItem("Open .thing_text (Temporary)");
             recentProjects = new ToolStripMenuItem("Recent Projects");
             save = new ToolStripMenuItem("Save");
             saveAs = new ToolStripMenuItem("Save As");
@@ -49,9 +49,9 @@ namespace Hades_Map_Editor.TopMenu
 
             DropDownItems.Add(newProject);
             newProject.DropDownItems.Add(newHadesProject);
-            newProject.DropDownItems.Add(newHades2Project);
+            newHadesProject.Enabled = false;
             DropDownItems.Add(openMapOrProject);
-            DropDownItems.Add(tempImport);
+            //DropDownItems.Add(tempImport);
             DropDownItems.Add(recentProjects);
             foreach (string project in configManager.GetAllProjectPath())
             {
@@ -75,11 +75,8 @@ namespace Hades_Map_Editor.TopMenu
         public void Populate()
         {
             newHadesProject.Click += NewHadesProject_Action;
-            newHadesProject.Enabled = false;
-            newHades2Project.Click += NewHades2Project_Action;
-            newHades2Project.Enabled = false;
             openMapOrProject.Click += OpenMapOrProject_Action;
-            tempImport.Click += TemporaryImport_Action;
+            //tempImport.Click += TemporaryImport_Action;
             if (recentProjects.DropDownItems.Count > 0)
             {
                 foreach (ToolStripMenuItem recentAction in recentProjects.DropDownItems)
@@ -112,18 +109,19 @@ namespace Hades_Map_Editor.TopMenu
         }
         private void NewHadesProject_Action(object sender, EventArgs e)
         {
-            //app.tabPage.CreateNewTabPage("New file");
-        }
-        private void NewHades2Project_Action(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
+            IOManager saveManager = IOManager.GetInstance();
+            try
+            {
+                (Parent as TopMenuStrip).GetMainControl().CreateNewTabPage(new ProjectData(saveManager.GetFileDialog(IOManager.DefaultCreateProject)));
+            }
+            catch (Exception) { }
         }
         private void OpenMapOrProject_Action(object sender, EventArgs e)
         {
             IOManager saveManager = IOManager.GetInstance();
             try
             {
-                (Parent as TopMenuStrip).GetMainControl().CreateNewTabPage(saveManager.LoadProject(""));
+                (Parent as TopMenuStrip).GetMainControl().CreateNewTabPage(saveManager.LoadProject(saveManager.GetFileDialog(IOManager.DefaultLoadProject)));
             }
             catch (Exception){ }
         }
@@ -132,7 +130,7 @@ namespace Hades_Map_Editor.TopMenu
             IOManager saveManager = IOManager.GetInstance();
             try
             {
-                (Parent as TopMenuStrip).GetMainControl().CreateNewTabPage(saveManager.ImportMap(""));
+                (Parent as TopMenuStrip).GetMainControl().CreateNewTabPage(saveManager.ImportMap(saveManager.GetFileDialog(IOManager.DefaultImportThingBin)));
             }
             catch (Exception) { }
         }

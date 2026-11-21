@@ -21,7 +21,7 @@ namespace Hades_Map_Editor.PropertiesSection
             Populate();
             //properties = new ThingTextProperties(this, panel);
         }
-        public void Initialize()
+        public new void Initialize()
         {
             //BackColor = System.Drawing.Color.DarkGray;
             //AutoScroll = true;
@@ -43,7 +43,7 @@ namespace Hades_Map_Editor.PropertiesSection
             ContentPanel.Controls.Add(propertiesListView);
             ContentPanel.Controls.Add(noSelectionLabel);
         }
-        public void Populate()
+        public new void Populate()
         {
             UnFocus();
             closeButton.Click += CloseButton_Click;

@@ -1,4 +1,4 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Project;
 using Hades_Map_Editor.PropertiesSection;
 using Hades_Map_Editor.AssetsSection;
 using Hades_Map_Editor.ElementsSection;

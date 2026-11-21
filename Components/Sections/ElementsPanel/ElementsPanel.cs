@@ -21,7 +21,7 @@ namespace Hades_Map_Editor.ElementsSection
             Initialize();
             Populate();
         }
-        public void Initialize()
+        public new void Initialize()
         {
             listBoxIndex = new Dictionary<int, int>();
             listBox = new ElementsList(this);
@@ -31,7 +31,7 @@ namespace Hades_Map_Editor.ElementsSection
             ContentPanel.Controls.Add(listBox);
         }
 
-        public void Populate()
+        public new void Populate()
         {
             RefreshData();
             FilterList(false,true);

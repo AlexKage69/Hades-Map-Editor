@@ -1,4 +1,4 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Asset;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Hades_Map_Editor.AssetsSection
 {
     public class AssetTable : Panel, IComponent, IPaging
     {
-        private List<Asset> assets;
+        private List<AssetData> assets;
         private int currentPage, maxPage;
         private int maxRow, maxColumn, wsize = 100, hsize = 118;
         public AssetItem[] assetsPanel;
@@ -53,7 +53,7 @@ namespace Hades_Map_Editor.AssetsSection
         public void Populate()
         {
         }
-        public void LoadItems(List<Asset> assets)
+        public void LoadItems(List<AssetData> assets)
         {
             this.assets = assets;
             currentPage = -1;

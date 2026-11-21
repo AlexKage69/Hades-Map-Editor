@@ -1,4 +1,6 @@
-﻿using Hades_Map_Editor.Data;
+﻿using Hades_Map_Editor.Data.Project;
+using Hades_Map_Editor.Data.Map;
+using Hades_Map_Editor.Data.Asset;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
@@ -95,7 +97,7 @@ namespace Hades_Map_Editor.MapSection
 
             if (obs.HasAsset())
             {
-                obs.GetAsset(out Asset asset);
+                obs.GetAsset(out AssetData asset);
                 var currentScale = canvas.GetCurrentScale();
                 // If you want to focus on Map, Uncomment below.
                 canvas.VerticalScroll.Value = (int)Math.Max(Math.Min((offset.Height * currentScale) - (Height/2) +(asset.GetRect().Height/ 2 * currentScale), canvas.VerticalScroll.Maximum), 0);

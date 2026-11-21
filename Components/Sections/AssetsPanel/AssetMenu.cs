@@ -61,8 +61,8 @@ namespace Hades_Map_Editor.AssetsSection
         {
             selectBiomeDropdown.Items.Clear();
             AssetsManager am = AssetsManager.GetInstance();
-            var biomes = am.Biomes();
-            if (biomes.Count > 0)
+            //var biomes = am.BiomesFiltered(AssetType.Tilesets);
+            /*if (biomes.Count > 0)
             {
                 selectBiomeDropdown.Enabled = true;
                 selectBiomeDropdown.Items.AddRange(biomes.ToArray());
@@ -70,7 +70,8 @@ namespace Hades_Map_Editor.AssetsSection
             else
             {
                 selectBiomeDropdown.Enabled = false;
-            }
+            }*/
+            selectBiomeDropdown.Enabled = false;
         }
 
         private void SelectBiome_SelectedIndexChanged(object sender, System.EventArgs e)

@@ -1,5 +1,5 @@
 ﻿using Hades_Map_Editor.Components.Dialogs;
-using Hades_Map_Editor.Data;
+using Hades_Map_Editor.Data.Project;
 using Hades_Map_Editor.Managers;
 using System;
 using System.Collections.Generic;
